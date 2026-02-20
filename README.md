@@ -36,10 +36,8 @@ The app provides a lightweight workflow:
 
 ## Screenshots
 
-> Replace these placeholders with your screenshots after publishing.
-
-| Home Screen | Result Screen |
-| --- | --- |
+| Home Screen                   | Result Screen                     |
+| ----------------------------- | --------------------------------- |
 | ![Home](docs/images/home.png) | ![Result](docs/images/result.png) |
 
 ## Tech Stack
