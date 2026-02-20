@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:imc_calculator/core/app_colors.dart';
 import 'package:imc_calculator/core/text_styles.dart';
 
-class GenderSelector extends StatefulWidget {
-  const GenderSelector({super.key});
+class GenderSelector extends StatelessWidget {
+  final String? selectedGender;
+  final ValueChanged<String> onGenderChanged;
 
-  @override
-  State<GenderSelector> createState() => _GenderSelectorState();
-}
-
-class _GenderSelectorState extends State<GenderSelector> {
-  String? selectedGender;
+  const GenderSelector({
+    super.key,
+    required this.selectedGender,
+    required this.onGenderChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _GenderSelectorState extends State<GenderSelector> {
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: () => setState(() => selectedGender = "M"),
+            onTap: () => onGenderChanged("M"),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 16,
@@ -37,7 +37,10 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/Male.png", height: 100),
+                      SizedBox(
+                        height: 100,
+                        child: Image.asset("assets/images/male.png"),
+                      ),
                       Text("Male".toUpperCase(), style: TextStyles.bodyText),
                     ],
                   ),
@@ -48,7 +51,7 @@ class _GenderSelectorState extends State<GenderSelector> {
         ),
         Expanded(
           child: GestureDetector(
-            onTap: () => setState(() => selectedGender = "F"),
+            onTap: () => onGenderChanged("F"),
             child: Padding(
               padding: const EdgeInsets.only(
                 left: 8,
@@ -67,8 +70,10 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/Female.png", height: 70),
-                      SizedBox(height: 30),
+                      SizedBox(
+                        height: 100,
+                        child: Image.asset("assets/images/female.png"),
+                      ),
                       Text("Female".toUpperCase(), style: TextStyles.bodyText),
                     ],
                   ),

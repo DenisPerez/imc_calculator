@@ -2,25 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:imc_calculator/core/app_colors.dart';
 import 'package:imc_calculator/core/text_styles.dart';
 
-class NumberSelector extends StatefulWidget {
+class NumberSelector extends StatelessWidget {
   final String title;
-  final Function() onIncrement;
-  final Function() onDrecrement;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
   final int value;
 
   const NumberSelector({
     super.key,
     required this.title,
     required this.onIncrement,
-    required this.onDrecrement,
+    required this.onDecrement,
     required this.value,
   });
 
-  @override
-  State<NumberSelector> createState() => _NumberSelectorState();
-}
-
-class _NumberSelectorState extends State<NumberSelector> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,39 +27,46 @@ class _NumberSelectorState extends State<NumberSelector> {
         ),
         child: Column(
           children: [
-            Text(widget.title, style: TextStyles.bodyText),
+            const SizedBox(height: 12),
+            Text(title, style: TextStyles.bodyText),
             Text(
-              widget.value.toString(),
-              style: TextStyle(
+              value.toString(),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 38,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
-                  heroTag: "${widget.title}-minus",
+                  mini: true,
+                  tooltip: "Decrease $title",
+                  heroTag: "$title-minus",
                   onPressed: () {
-                    widget.onDrecrement();
+                    onDecrement();
                   },
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   backgroundColor: AppColors.primary,
-                  child: Icon(Icons.remove, color: Colors.white),
+                  child: const Icon(Icons.remove, color: Colors.white),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 FloatingActionButton(
-                  heroTag: "${widget.title}-plus",
+                  mini: true,
+                  tooltip: "Increase $title",
+                  heroTag: "$title-plus",
                   onPressed: () {
-                    widget.onIncrement();
+                    onIncrement();
                   },
-                  shape: CircleBorder(),
+                  shape: const CircleBorder(),
                   backgroundColor: AppColors.primary,
-                  child: Icon(Icons.add, color: Colors.white),
+                  child: const Icon(Icons.add, color: Colors.white),
                 ),
               ],
             ),
+            const SizedBox(height: 12),
           ],
         ),
       ),
