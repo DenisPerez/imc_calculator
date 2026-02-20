@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:imc_calculator/components/gender_selector.dart';
 import 'package:imc_calculator/components/height_selector.dart';
 import 'package:imc_calculator/components/number_selector.dart';
 import 'package:imc_calculator/core/app_colors.dart';
 import 'package:imc_calculator/core/text_styles.dart';
+import 'package:imc_calculator/screens/imc_result_screen.dart';
 
 class ImcHomeScreen extends StatefulWidget {
   const ImcHomeScreen({super.key});
@@ -13,16 +16,23 @@ class ImcHomeScreen extends StatefulWidget {
 }
 
 class _ImcHomeScreenState extends State<ImcHomeScreen> {
-  int selectedAge = 0;
-  int selectedWeight = 0;
-  int selectedHeight = 0;
+  int selectedAge = 26;
+  int selectedWeight = 72;
+  double selectedHeight = 178;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         GenderSelector(),
-        HeightSelector(),
+        HeightSelector(
+          height: selectedHeight,
+          onHeightChanged: (value) {
+            setState(() {
+              selectedHeight = value;
+            });
+          },
+        ),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
@@ -33,12 +43,12 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                   value: selectedWeight,
                   onIncrement: () {
                     setState(() {
-                      selectedWeight++;
+                      selectedWeight = max(0, selectedWeight + 1);
                     });
                   },
                   onDrecrement: () {
                     setState(() {
-                      selectedWeight--;
+                      selectedWeight = max(0, selectedWeight - 1);
                     });
                   },
                 ),
@@ -49,12 +59,12 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                   value: selectedAge,
                   onIncrement: () {
                     setState(() {
-                      selectedAge++;
+                      selectedAge = max(0, selectedAge + 1);
                     });
                   },
                   onDrecrement: () {
                     setState(() {
-                      selectedAge--;
+                      selectedAge = max(0, selectedAge - 1);
                     });
                   },
                 ),
@@ -69,7 +79,17 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImcResultScreen(
+                      height: selectedHeight,
+                      weight: selectedWeight,
+                    ),
+                  ),
+                );
+              },
               style: ButtonStyle(
                 shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(

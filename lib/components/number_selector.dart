@@ -45,6 +45,7 @@ class _NumberSelectorState extends State<NumberSelector> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
+                  heroTag: "${widget.title}-minus",
                   onPressed: () {
                     widget.onDrecrement();
                   },
@@ -54,6 +55,7 @@ class _NumberSelectorState extends State<NumberSelector> {
                 ),
                 SizedBox(width: 12),
                 FloatingActionButton(
+                  heroTag: "${widget.title}-plus",
                   onPressed: () {
                     widget.onIncrement();
                   },

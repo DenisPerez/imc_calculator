@@ -37,7 +37,7 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/male.png", height: 100),
+                      Image.asset("assets/images/Male.png", height: 100),
                       Text("Male".toUpperCase(), style: TextStyles.bodyText),
                     ],
                   ),
@@ -67,7 +67,7 @@ class _GenderSelectorState extends State<GenderSelector> {
                   padding: const EdgeInsets.all(12),
                   child: Column(
                     children: [
-                      Image.asset("assets/images/female.png", height: 70),
+                      Image.asset("assets/images/Female.png", height: 70),
                       SizedBox(height: 30),
                       Text("Female".toUpperCase(), style: TextStyles.bodyText),
                     ],
